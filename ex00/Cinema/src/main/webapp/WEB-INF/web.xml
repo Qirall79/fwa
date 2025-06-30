@@ -11,9 +11,15 @@
         <servlet-name>HelloWorldServlet</servlet-name>
         <servlet-class>fr.fortytwo.cinema.servlets.HelloServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>SignInServlet</servlet-name>
+        <servlet-class>fr.fortytwo.cinema.servlets.SignInServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>fr.fortytwo.cinema.servlets.SignUpServlet</servlet-class>
+    </servlet>
 
-    <servlet-mapping>
-    <servlet-name>HelloWorldServlet</servlet-name>
-    <url-pattern>/HelloWorld</url-pattern>
-</servlet-mapping>
 </web-app>

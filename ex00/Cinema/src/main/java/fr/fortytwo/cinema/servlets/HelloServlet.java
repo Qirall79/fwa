@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "HelloServlet", urlPatterns = {"/hello"})
+@WebServlet("/hello")
 public class HelloServlet extends HttpServlet {
 
     private UsersService usersService;
