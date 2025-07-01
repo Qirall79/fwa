@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.context.ApplicationContext;
 
+import fr.fortytwo.cinema.models.User;
 import fr.fortytwo.cinema.services.UsersService;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
@@ -13,12 +14,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/hello")
-public class HelloServlet extends HttpServlet {
+@WebServlet("/profile")
+public class ProfileServlet extends HttpServlet {
 
     private UsersService usersService;
 
-    public HelloServlet() {}
+    public ProfileServlet() {}
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -31,9 +32,17 @@ public class HelloServlet extends HttpServlet {
     
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().println("<h1>Hello, %s!</h1>".formatted(usersService.getUsername()));
+
+        User user = (User) req.getSession().getAttribute("user");
+
+        if (user == null) {
+            resp.sendRedirect("/cinema/signIn");
+            return ;
+        }
+
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.getWriter().println("<h1>Hello, %s!</h1>".formatted(user.getFirstName()));
     }
 }

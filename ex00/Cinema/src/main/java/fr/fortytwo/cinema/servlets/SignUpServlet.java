@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.context.ApplicationContext;
 
+import fr.fortytwo.cinema.models.User;
 import fr.fortytwo.cinema.services.UsersService;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -49,6 +50,8 @@ public class SignUpServlet extends HttpServlet {
         String lastName = req.getParameter("last_name");
         String password = req.getParameter("password");
 
-		// todo: create user
+        usersService.createUser(new User(0, firstName, lastName, phoneNumber, password));
+
+        resp.sendRedirect("/cinema/signIn");
     }
 }

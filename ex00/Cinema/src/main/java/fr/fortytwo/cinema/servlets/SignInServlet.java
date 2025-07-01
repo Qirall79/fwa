@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.context.ApplicationContext;
 
+import fr.fortytwo.cinema.models.User;
 import fr.fortytwo.cinema.services.UsersService;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -30,7 +31,7 @@ public class SignInServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        String html = "<h1>Sign Up</h1>"
+        String html = "<h1>Sign In</h1>"
                 + "<form action='/cinema/signIn' method='POST'>"
                 + "<input type='text' placeholder='phone number' name='phone' />"
                 + "<input type='password' placeholder='password' name='password' />"
@@ -45,6 +46,14 @@ public class SignInServlet extends HttpServlet {
         String phoneNumber = req.getParameter("phone");
         String password = req.getParameter("password");
 
-		// todo: check user and create session
+		User user = usersService.signInUser(phoneNumber, password);
+
+        req.getSession().setAttribute("user", user);
+
+        if (user == null) {
+            resp.sendRedirect("/cinema/signIn");
+        }
+        else 
+            resp.sendRedirect("/cinema/profile");
     }
 }

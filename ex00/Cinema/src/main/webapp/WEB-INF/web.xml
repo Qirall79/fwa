@@ -8,8 +8,8 @@
 
 <web-app>
     <servlet>
-        <servlet-name>HelloWorldServlet</servlet-name>
-        <servlet-class>fr.fortytwo.cinema.servlets.HelloServlet</servlet-class>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>fr.fortytwo.cinema.servlets.ProfileServlet</servlet-class>
     </servlet>
     
     <servlet>
