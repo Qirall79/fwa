@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright 2002 Sun Microsystems, Inc. All rights reserved.
+-->
+<!DOCTYPE web-app PUBLIC '-//Sun Microsystems, Inc.//DTD Web 
+     Application 2.3//EN' 'http://java.sun.com/dtd/web-app_2_3.dtd'>
+
+
+<web-app>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>fr.fortytwo.cinema.servlets.ProfileServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>SignInServlet</servlet-name>
+        <servlet-class>fr.fortytwo.cinema.servlets.SignInServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>fr.fortytwo.cinema.servlets.SignUpServlet</servlet-class>
+    </servlet>
+    
+
+    <filter>
+        <filter-name> AuthFilter </filter-name>
+        <filter-class>fr.fortytwo.cinema.filters.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/profile/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
