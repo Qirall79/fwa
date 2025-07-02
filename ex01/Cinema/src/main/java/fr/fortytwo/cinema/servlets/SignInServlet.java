@@ -29,6 +29,11 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute("user") != null) {
+            resp.sendRedirect("/cinema/profile");
+            return;
+        }
+
         resp.setContentType("text/html;charset=UTF-8");
 
         String html = "<h1>Sign In</h1>"
@@ -46,7 +51,7 @@ public class SignInServlet extends HttpServlet {
         String phoneNumber = req.getParameter("phone");
         String password = req.getParameter("password");
 
-		User user = usersService.signInUser(phoneNumber, password);
+        User user = usersService.signInUser(phoneNumber, password);
 
         req.getSession().setAttribute("user", user);
     }

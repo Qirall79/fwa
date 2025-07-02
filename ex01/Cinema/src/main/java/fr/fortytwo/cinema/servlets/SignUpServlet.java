@@ -13,12 +13,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/signIn")
-public class SignInServlet extends HttpServlet {
+@WebServlet("/signUp")
+public class SignUpServlet extends HttpServlet {
 
     private UsersService usersService;
 
-    public SignInServlet() {
+    public SignUpServlet() {
     }
 
     @Override
@@ -29,10 +29,18 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (req.getSession().getAttribute("user") != null) {
+            resp.sendRedirect("/cinema/profile");
+            return ;
+        }
+
         resp.setContentType("text/html;charset=UTF-8");
 
-        String html = "<h1>Sign In</h1>"
-                + "<form action='/cinema/signIn' method='POST'>"
+        String html = "<h1>Sign Up</h1>"
+                + "<form action='/cinema/signUp' method='POST' >"
+                + "<input type='text' placeholder='first name' name='first_name' />"
+                + "<input type='text' placeholder='last name' name='last_name' />"
                 + "<input type='text' placeholder='phone number' name='phone' />"
                 + "<input type='password' placeholder='password' name='password' />"
                 + "<button type='submit'>Submit</button>"
@@ -44,10 +52,12 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String phoneNumber = req.getParameter("phone");
+        String firstName = req.getParameter("first_name");
+        String lastName = req.getParameter("last_name");
         String password = req.getParameter("password");
 
-		User user = usersService.signInUser(phoneNumber, password);
+        usersService.createUser(new User(0, firstName, lastName, phoneNumber, password));
 
-        req.getSession().setAttribute("user", user);
+        resp.sendRedirect("/cinema/signIn");
     }
 }

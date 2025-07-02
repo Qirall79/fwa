@@ -19,22 +19,20 @@ public class ProfileServlet extends HttpServlet {
 
     private UsersService usersService;
 
-    public ProfileServlet() {}
+    public ProfileServlet() {
+    }
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         ServletContext context = config.getServletContext();
         ApplicationContext springContext = (ApplicationContext) context.getAttribute("springContext");
-        
+
         this.usersService = springContext.getBean(UsersService.class);
     }
-
-    
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         resp.setContentType("text/html;charset=UTF-8");
         resp.getWriter().println("<h1>Profile</h1>");
     }
