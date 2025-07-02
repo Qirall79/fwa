@@ -90,10 +90,10 @@ public class AvatarServlet extends HttpServlet {
             size += part.getSize();
             part.write(UPLOAD_PATH + fileName);
         }
-        resp.getWriter().println("Uploaded successfully !");
 
         String extension = fileName.split("\\.")[1];
         User user = (User) req.getSession().getAttribute("user");
         avatarsRepository.save(new Avatar(0, size, fileName, req.getServletContext().getMimeType(extension), user.getId()));
+        resp.sendRedirect("/cinema/profile");
     }
 }
